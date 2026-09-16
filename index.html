@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typing Speed Challenge ภาษาไทย</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="crt-overlay" aria-hidden="true"></div>
+
+<!-- ============ HOME SCREEN ============ -->
+<section id="home-screen" class="screen active">
+
+  <div class="broadcast-bar">
+    <span class="dot"></span> LIVE · งานวันวิทยาศาสตร์ · พิมพ์เร็วชิงแชมป์
+  </div>
+
+  <header class="hero">
+    <h1 class="game-title">
+      <span class="title-line title-line--1">TYPING SPEED</span>
+      <span class="title-line title-line--2">CHALLENGE</span>
+      <span class="title-line title-line--3">ภาษาไทย</span>
+    </h1>
+    <p class="hero-sub">พิมพ์คำให้ไว ก่อนเวลาจะหมด — ชิงตำแหน่งเบอร์ 1 บนกระดานคะแนน</p>
+  </header>
+
+  <div class="home-grid">
+
+    <div class="panel entry-panel">
+      <div class="panel-label">ลงทะเบียนผู้เล่น</div>
+      <label class="field-label" for="player-name">ชื่อผู้เล่น</label>
+      <input
+        type="text"
+        id="player-name"
+        class="name-input"
+        placeholder="พิมพ์ชื่อของคุณที่นี่..."
+        maxlength="20"
+        autocomplete="off"
+      >
+      <p id="name-error" class="error-msg" aria-live="polite"></p>
+
+      <div class="rules-mini">
+        <div class="rule-chip"><strong>30</strong> วินาทีเริ่มต้น</div>
+        <div class="rule-chip"><strong>+2</strong> วินาทีต่อคำถูก</div>
+        <div class="rule-chip"><strong>+1</strong> คะแนนต่อคำถูก</div>
+      </div>
+
+      <button id="start-btn" class="btn-start">
+        <span>เริ่มเกม</span>
+      </button>
+    </div>
+
+    <div class="panel board-panel">
+      <div class="panel-label">
+        <span>อันดับสูงสุด</span>
+        <span class="panel-label-sub">TOP 10</span>
+      </div>
+      <ol id="leaderboard-list" class="leaderboard-list">
+        <!-- populated by JS -->
+      </ol>
+      <p id="leaderboard-empty" class="empty-msg">ยังไม่มีผู้เล่นทำคะแนน — เป็นคนแรกเลย!</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ GAME SCREEN ============ -->
+<section id="game-screen" class="screen">
+
+  <div class="hud-top">
+    <div class="hud-stat hud-player">
+      <span class="hud-label">ผู้เล่น</span>
+      <span id="hud-player-name" class="hud-value hud-value--name">—</span>
+    </div>
+
+    <div class="hud-stat hud-score">
+      <span class="hud-label">คะแนน</span>
+      <span id="hud-score" class="hud-value hud-value--score">0</span>
+    </div>
+
+    <div class="hud-stat hud-timer">
+      <span class="hud-label">เวลา</span>
+      <span id="hud-time" class="hud-value hud-value--time">30</span>
+    </div>
+  </div>
+
+  <div class="game-controls">
+    <button id="end-game-btn" class="btn-end-game">จบเกม</button>
+  </div>
+
+  <div class="timer-track">
+    <div id="timer-fill" class="timer-fill"></div>
+  </div>
+
+  <div class="stage">
+    <div id="combo-badge" class="combo-badge">
+      <span class="combo-num" id="combo-num">0</span>
+      <span class="combo-text">คำติดต่อกัน</span>
+    </div>
+
+    <div class="word-frame">
+      <span class="bracket bracket-tl"></span>
+      <span class="bracket bracket-tr"></span>
+      <span class="bracket bracket-bl"></span>
+      <span class="bracket bracket-br"></span>
+      <div id="target-word" class="target-word">คำ</div>
+    </div>
+
+    <input
+      type="text"
+      id="typing-input"
+      class="typing-input"
+      placeholder="พิมพ์คำที่เห็นแล้วกด Enter หรือเว้นวรรค"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
+    >
+    <p id="typo-hint" class="typo-hint" aria-live="polite">&nbsp;</p>
+  </div>
+</section>
+
+<!-- ============ RESULT OVERLAY ============ -->
+<div id="result-overlay" class="overlay">
+  <div class="result-card">
+    <div class="result-eyebrow">หมดเวลา!</div>
+    <h2 class="result-title">สรุปผลการแข่งขัน</h2>
+
+    <div class="result-score-block">
+      <span class="result-score-label">คะแนนของ <span id="result-name">-</span></span>
+      <span id="result-score" class="result-score-num">0</span>
+    </div>
+
+    <div id="result-rank-banner" class="result-rank-banner" hidden>
+      🏆 ติดอันดับที่ <span id="result-rank-num">-</span> บนกระดานคะแนน!
+    </div>
+
+    <div class="result-actions">
+      <button id="home-btn" class="btn-primary">กลับหน้าแรก</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
